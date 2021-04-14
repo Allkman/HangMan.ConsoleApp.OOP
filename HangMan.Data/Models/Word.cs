@@ -14,6 +14,7 @@ namespace HangMan.Data.Models
         public virtual Topic Topic { get; set; }
         public int GuessCount { get; set; }
         public int CorrectGuessCount { get; set; }
-        public List<PlayerScore> PlayerScores { get; set; }
+        public virtual List<PlayerScore> PlayerScores { get; set; }
+        
     }
 }

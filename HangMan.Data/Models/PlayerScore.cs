@@ -11,6 +11,7 @@ namespace HangMan.Data.Models
         public int PlayerScoreId { get; set; }
         public int PlayerId { get; set; }
         public DateTime DatePlayed { get; set; }
+        
         public int WordId { get; set; }
         public int GuessCount { get; set; }
         public bool IsCorrect { get; set; }

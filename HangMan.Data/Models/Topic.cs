@@ -12,6 +12,6 @@ namespace HangMan.Data.Models
         [Required]
         public string Name { get; set; }
         public virtual List<Word> Words { get; set; }
-        public virtual List<PlayerScore> PlayerScores { get; set; }
+        //public virtual List<PlayerScore> PlayerScores { get; set; }
     }
 }

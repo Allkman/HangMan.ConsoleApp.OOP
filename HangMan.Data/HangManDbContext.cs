@@ -22,8 +22,8 @@ namespace HangMan.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Topic>().HasData(Topics);
-            modelBuilder.Entity<Topic>().HasData(Words);               
+            modelBuilder.Entity<TopicInitData>().HasData(Topics);
+            modelBuilder.Entity<WordsInitData>().HasData(Words);               
         }
     }
 }
