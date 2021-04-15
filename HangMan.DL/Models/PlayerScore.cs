@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace HangMan.Data.Models
+namespace HangMan.DL.Models
 {
     public class PlayerScore
     {
@@ -15,7 +15,10 @@ namespace HangMan.Data.Models
         public int WordId { get; set; }
         public int GuessCount { get; set; }
         public bool IsCorrect { get; set; }
-        public virtual Word Word { get; set; }
+        public virtual LTName LTName { get; set; }
+        public virtual LTCity LTCity { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Furniture Furniture { get; set; }
         public virtual Player Player { get; set; }
     }
 }

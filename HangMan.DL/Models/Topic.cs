@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace HangMan.Data.Models
+namespace HangMan.DL.Models
 {
     public class Topic
     {
@@ -11,7 +11,10 @@ namespace HangMan.Data.Models
         public int TopicId { get; set; }
         [Required]
         public string Name { get; set; }
-        public virtual List<Word> Words { get; set; }
+        public virtual List<LTName> LTNames { get; set; }
+        public virtual List<LTCity> LTCities { get; set; }
+        public virtual List<Country> Countries { get; set; }
+        public virtual List<Furniture> Furnitures { get; set; }
         //public virtual List<PlayerScore> PlayerScores { get; set; }
     }
 }
