@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HangMan.Server.InitialData
+namespace HangMan.HMServer.InitialData
 {
     public class LTUCitiesInitData
     {

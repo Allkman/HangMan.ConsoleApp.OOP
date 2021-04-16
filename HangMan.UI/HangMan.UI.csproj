@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HangMan.BL\HangMan.BL.csproj" />
-    <ProjectReference Include="..\HangMan.Server\HangMan.Server.csproj" />
   </ItemGroup>
 
   <ItemGroup>

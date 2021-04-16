@@ -10,4 +10,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HangMan.DL\HangMan.DL.csproj" />
+    <ProjectReference Include="..\HangMan.HMServer\HangMan.HMServer.csproj" />
+  </ItemGroup>
+
 </Project>

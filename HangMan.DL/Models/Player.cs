@@ -10,7 +10,7 @@ namespace HangMan.DL.Models
         [Key]
         public int PlayerId { get; set; }
         [Required]
-        public string playerName { get; set; }
+        public string PlayerName { get; set; }
         public virtual List<PlayerScore> PlayerScores { get; set; }
     }
 }

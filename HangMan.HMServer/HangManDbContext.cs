@@ -1,12 +1,12 @@
-﻿using HangMan.Server.InitialData;
-using HangMan.DL.Models;
+﻿using HangMan.DL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using HangMan.HMServer.InitialData;
 
-namespace HangMan.Server
+namespace HangMan.HMServer
 {
     public class HangManDbContext : DbContext
     {
@@ -28,7 +28,20 @@ namespace HangMan.Server
             modelBuilder.Entity<LTName>().HasData(NamesInitData.DataSeed);               
             modelBuilder.Entity<LTCity>().HasData(LTUCitiesInitData.DataSeed);               
             modelBuilder.Entity<Country>().HasData(CountriesInitData.DataSeed);               
-            modelBuilder.Entity<Furniture>().HasData(FurnitureInitData.DataSeed);               
+            modelBuilder.Entity<Furniture>().HasData(FurnitureInitData.DataSeed);
+
+            modelBuilder.Entity<Topic>()
+                .HasMany(n => n.LTNames)
+                .WithOne(t => t.Topic);
+            modelBuilder.Entity<Topic>()
+                .HasMany(lc => lc.LTCities)
+                .WithOne(t => t.Topic);
+            modelBuilder.Entity<Topic>()
+               .HasMany(c => c.Countries)
+               .WithOne(t => t.Topic);
+            modelBuilder.Entity<Topic>()
+                .HasMany(f => f.Furnitures)
+                .WithOne(t => t.Topic);
         }
     }
 }
