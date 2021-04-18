@@ -1,5 +1,8 @@
-﻿using HangMan.BL.Managers.Interfaces;
+﻿using HangMan.BL.Managers;
+using HangMan.BL.Managers.Interfaces;
 using HangMan.DL.Models;
+using HangMan.HMServer;
+using HangMan.UI.Repositories;
 using HangMan.UI.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,18 +12,21 @@ namespace HangMan.UI.Managers
 {
     public class GameManager
     {
+        private readonly HangManDbContext _dbContext;
         private readonly IUIInteracionRepository _messagesRepository;
         private readonly IPlayerManager _playerManager;
         private readonly List<Topic> _topics;
-        List<UsedWord> usedWords = new List<UsedWord>();
-        private readonly IWordManager _wordManager;
-        public GameManager(IUIInteracionRepository messagesRepository)
+        private readonly IManageDb _manageDb;
+        private readonly IHiddenWordManager _hiddenWordManager;
+        public GameManager(HangManDbContext dbContext)
         {
-            _messagesRepository = messagesRepository;
-            _topics = _wordManager.GetAllTopics();
+            _dbContext = dbContext;
+            dbContext.Database.EnsureCreated();
+            _topics = _manageDb.GetAllTopics();
+            
         }
 
-        public void BeginGame()
+        public void PlayerLogin()
         {
             var playerName = _messagesRepository.LoginMessage();
             var player = _playerManager.GetPlayerByPlayerName(playerName);
@@ -30,7 +36,6 @@ namespace HangMan.UI.Managers
             }
             _messagesRepository.PlayerStatisticsMessage(player);
             StartHangMan();
-
         }
 
         private void StartHangMan()
@@ -42,17 +47,21 @@ namespace HangMan.UI.Managers
 
                 var topic = TopicSelection();
                 var word = _wordManager.GetRandomWordInTopic(topic);
+
                 if (word == null)
                 {
                     Console.WriteLine("No more Words"); //add to InteractionRepository
                 }
                 else
                 {
-                   // PlayGame(topic, word);
+                    PlayHangMan(topic, word);
                 }
+
                 replay = (Console.ReadKey().KeyChar.ToString().ToUpper() == "T");
+                //-------------------------------
             }
         }
+
         private Topic TopicSelection()
         {
             _messagesRepository.SelectTopicMessage();
@@ -69,8 +78,10 @@ namespace HangMan.UI.Managers
             }
             Console.Clear();
             _messagesRepository.CorrectTopicMessage(_topics[topicNumber - 1].Name);
+            _manageDb.GetWordList(topicNumber);
             return _topics[topicNumber - 1];
         }
+       
         private void DisplayTopicNames()
         {
             for (int i = 1; i <= _topics.Count; i++)
@@ -79,6 +90,52 @@ namespace HangMan.UI.Managers
             }
             Console.WriteLine();
         }
-        
+       
+        private void PlayHangMan(string topic, string word)
+        {
+            _hiddenWordManager = new HiddenWordManager(word);
+            bool guessingAllowed = true;
+            _messagesRepository.HangmanPictureMessage(beginLives);
+            Console.WriteLine();
+            Console.WriteLine(_hiddenWordManager.GetHiddedWordStructure());
+
+            while (guessingAllowed)
+            {
+                _guess = new Guess(_massageFactory.WordInputMessage(), _hiddenWordManager);
+
+                if (_guess.IsWordGuessed)
+                {
+                    WordGuessMechanics(zodis);
+                    leidziamaSpeti = false;
+                }
+                else
+                {
+                    _guess.CheckLetter();
+
+                    if (_hiddenWordManager.IncorrectGuesesCount == maxLives)
+                    {
+                        _massageFactory.HangmanPictureMessage(maxLives);
+                        _massageFactory.LostGameMessage(word.Text);
+                        leidziamaSpeti = false;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        _massageFactory.HangmanPictureMessage(_hiddenWordManager.IncorrectGuesesCount);
+                        _massageFactory.IncorrectLettersListMessage(_hiddenWordManager.HiddenWord.IncorrectGueses);
+
+                        Console.WriteLine(_hiddenWordManager.GetHiddedWordStructure());
+                        if (!_hiddenWordManager.HasHiddenLetters)
+                        {
+                            _massageFactory.WinGameMessage(word.Text);
+                            leidziamaSpeti = false;
+                        }
+                    }
+                }
+            }
+        }
+        selectedSubject.Words.Remove(word);
+                _playerManager.AddScoreBoard(GetScoreBoard(word, player.PlayerId));
     }
+    
 }

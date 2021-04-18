@@ -11,5 +11,6 @@ namespace HangMan.BL.Models
         public LTCity LTCity { get; set; }
         public Country Country { get; set; }
         public Furniture Furniture { get; set; }
+
     }
 }
