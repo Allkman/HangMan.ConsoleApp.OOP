@@ -14,14 +14,17 @@ namespace HangMan.UI.Managers
     public class GameManager : IGameManager
     {
    
-        private readonly IUIInteracionRepository _messagesRepository;
+        private readonly IMessagesRepository _messagesRepository;
         private readonly IPlayerManager _playerManager;
         private readonly List<Topic> _topics;
         private readonly IManageDb _manageDb;
         private readonly IHiddenWordManager _hiddenWordManager;
-        public GameManager()
+        public GameManager(IPlayerManager playerManager, IMessagesRepository messagesRepository, IManageDb manageDb)
         {
-
+            _playerManager = playerManager;
+            _messagesRepository = messagesRepository;
+            _manageDb = manageDb;
+            
             _topics = _manageDb.GetAllTopics();
 
         }
@@ -73,7 +76,7 @@ namespace HangMan.UI.Managers
 
         private void DisplayTopicNames()
         {
-            for (int i = 1; i <= _topics.Count; i++)
+            for (int i = 0; i < _topics.Count; i++)
             {
                 Console.Write("\n {0} - {1}", i + 1, _topics[i].Name);
             }

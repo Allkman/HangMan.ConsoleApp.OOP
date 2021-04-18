@@ -10,17 +10,24 @@ using HangMan.UI.Repositories.Interfaces;
 namespace HangMan.UI.Repositories
 {
 
-    public class UIInteractionRepository : IUIInteracionRepository
+    public class MessagesRepository : IMessagesRepository
     {
         public static Format _colorify { get; set; } //ConsoleApp UI 
+        private readonly HangerUIRepository _hangerUI;
+
+        public MessagesRepository()
+        {
+            _hangerUI = new HangerUIRepository();
+        }
+
         public int PlayerGreetingMessage()
         {
-            _colorify.Clear();
-            _colorify.WriteLine("Welcome to a HangMan Game");
-            _colorify.WriteLine("Choose what you want to do");
-            _colorify.WriteLine("");
-            _colorify.WriteLine("1. View Statistics ");
-            _colorify.WriteLine("2. Play Game");
+            Console.Clear();
+            Console.WriteLine("Welcome to a HangMan Game");
+            Console.WriteLine("Choose what you want to do");
+            Console.WriteLine("");
+            Console.WriteLine("1. View Statistics ");
+            Console.WriteLine("2. Play Game");
 
             int choiceNumber = 0;
             while (choiceNumber == 0)
@@ -34,30 +41,34 @@ namespace HangMan.UI.Repositories
         }
         public string LoginMessage()
         {
-            _colorify.Clear();
-            _colorify.WriteLine("Enter your name: ");
-            _colorify.WriteLine("");
+            Console.Clear();
+            Console.WriteLine("Enter your name: ");
+            Console.WriteLine("");
             return Console.ReadLine();
         }
         public void PlayerStatisticsMessage(Player player)
         {
-            _colorify.WriteLine($"Player {player.PlayerName} played {player.PlayerScores.Count} times");
-            _colorify.WriteLine($"And won {player.PlayerScores.Count(z => z.IsCorrect)} times");
-            _colorify.WriteLine("");
-            _colorify.WriteLine("-= Press any key to continue =-");
+            Console.WriteLine($"Player {player.PlayerName} played {player.PlayerScores.Count} times");
+            Console.WriteLine($"And won {player.PlayerScores.Count(z => z.IsCorrect)} times");
+            Console.WriteLine("");
+            Console.WriteLine("-= Press any key to continue =-");
             Console.ReadKey();
         }
         public void SelectTopicMessage()
         {
-            _colorify.WriteLine("Select topic: ");
+            Console.WriteLine("Select topic: ");
         }
         public void IncorrectTopictMessage(string topicNumber)
         {
-            _colorify.WriteLine("\n {0} no such topic, try again", topicNumber);
+            Console.WriteLine("\n {0} no such topic, try again", topicNumber);
         }
         public void CorrectTopicMessage(string topicName)
         {
             Console.WriteLine("\n Topic: {0}", topicName);
+        }
+        public void HangmanPictureMessage(int incorrectGuessCount)
+        {
+            _hangerUI.DisplayPicture(incorrectGuessCount);
         }
     }
 }

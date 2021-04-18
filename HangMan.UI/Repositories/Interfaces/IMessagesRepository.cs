@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HangMan.UI.Repositories.Interfaces
 {
-    public interface IUIInteracionRepository
+    public interface IMessagesRepository
     {
         void CorrectTopicMessage(string topicName);
         void IncorrectTopictMessage(string topicNumber);
