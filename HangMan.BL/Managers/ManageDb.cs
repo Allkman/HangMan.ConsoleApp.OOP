@@ -22,7 +22,7 @@ namespace HangMan.BL.Managers
         public Topic Topic { get; set; }
 
 
-        private delegate List<Word> TopicDelegate();
+        private delegate void TopicDelegate();
         private delegate Word WordsDelegate();
 
         
@@ -37,29 +37,29 @@ namespace HangMan.BL.Managers
             list = _dbContext.Topics.ToList();
             return list;
         }
-        public List<LTName> GetLTNames()
+        public void GetLTNames()
         {
             List<LTName> list = new List<LTName>();
             list = _dbContext.LTNames.ToList();//.Include(z => z.PlayerScores).Include(z => z.Topic) ??   
-            return list;
+            
         }
-        public List<LTCity> GetLTCities()
+        public void GetLTCities()
         {
             List<LTCity> list = new List<LTCity>();
             list = _dbContext.LTCities.ToList();
-            return list;
+           
         }
-        public List<Country> GetCountries()
+        public void GetCountries()
         {
             List<Country> list = new List<Country>();
             list = _dbContext.Countries.ToList();
-            return list;
+            
         }
-        public List<Furniture> GetFurnitures()
+        public void GetFurnitures()
         {
             List<Furniture> list = new List<Furniture>();
             list = _dbContext.Furnitures.ToList();
-            return list;
+            
         }
 
         public void SelectWordsList(int topicNumber)
@@ -73,18 +73,7 @@ namespace HangMan.BL.Managers
             };
             strategy[topicNumber].Value.Invoke();
         }
-        public Word SelectWordsListRandomizer(int topicNumber)
-        {
-            Topic topic;
-            Dictionary<int, Lazy<WordsDelegate>> strategy = new Dictionary<int, Lazy<WordsDelegate>>
-            {
-                {1, new Lazy<WordsDelegate>(() => GetRandomWordInLTName(topic)},
-                {2, new Lazy<WordsDelegate>(() => GetRandomWordInLTCity(topic))},
-                {3, new Lazy<WordsDelegate>(() => GetRandomWordInCountry(topic))},
-                {4, new Lazy<WordsDelegate>(() => GetRandomWordInFurniture(topic))},
-            };
-            return strategy[topicNumber].Value.Invoke;
-        }
+       
         public LTName GetRandomWordInLTName(Topic topic)
         {
             IRandomExtension _rndExtension = new RandomExtension();
