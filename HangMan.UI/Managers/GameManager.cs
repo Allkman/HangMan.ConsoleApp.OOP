@@ -43,17 +43,17 @@ namespace HangMan.UI.Managers
 
         private void StartHangMan()
         {
+            int topicNumber = 0;
             bool replay = true;
             while (replay)
             {
                 Console.Clear();
 
                 var topic = TopicSelection();
-                //var word = _manageDb.GetRandomWordInTopic(topic);
+                var word = _manageDb.SelectWordsListToRandom(topic, topicNumber);
 
             }
         }
-
         private Topic TopicSelection()
         {
             _messagesRepository.SelectTopicMessage();

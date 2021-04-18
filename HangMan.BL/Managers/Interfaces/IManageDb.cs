@@ -8,6 +8,7 @@ namespace HangMan.BL.Managers.Interfaces
     public interface IManageDb
     {
         List<Topic> GetAllTopics();
-        void SelectWordsList(int topicNumber);
+        int SelectWordsList(int topicNumber);
+        int SelectWordsListToRandom(Topic topic, int topicNumber);
     }
 }

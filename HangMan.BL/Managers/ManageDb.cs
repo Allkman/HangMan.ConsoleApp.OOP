@@ -21,15 +21,54 @@ namespace HangMan.BL.Managers
         public Word Word { get; set; }
         public Topic Topic { get; set; }
 
-
-        private delegate void TopicDelegate();
+        private delegate List<Word> TopicDelegate();
         private delegate Word WordsDelegate();
-
         
         public ManageDb(HangManDbContext dbContext)
         {
-            _dbContext = dbContext;
-            
+            _dbContext = dbContext;            
+        }
+        public int SelectWordsList(int topicNumber)
+        {
+            Console.Clear();
+           switch(topicNumber)
+            { 
+                case 0:
+                    GetLTNames();
+                    break;
+                case 1:
+                    GetLTCities();
+                    break;
+                case 2:
+                    GetCountries();
+                    break;
+                case 3:
+                    GetFurnitures();
+                    break;
+            }
+            return topicNumber;
+        }
+        public int SelectWordsListToRandom(Topic topic, int topicNumber)
+        {
+            int numb = 0;
+            topicNumber = SelectWordsList(numb);
+            Console.Clear();
+            switch (numb)
+            {
+                case 0:
+                    GetRandomWordInLTName(topic);
+                    break;
+                case 1:
+                    GetRandomWordInLTCity(topic);
+                    break;
+                case 2:
+                    GetRandomWordInCountry(topic);
+                    break;
+                case 3:
+                    GetRandomWordInFurniture(topic);
+                    break;
+            }
+            return numb;
         }
         public List<Topic> GetAllTopics()
         {
@@ -37,42 +76,32 @@ namespace HangMan.BL.Managers
             list = _dbContext.Topics.ToList();
             return list;
         }
-        public void GetLTNames()
+        public List<LTName> GetLTNames()
         {
-            List<LTName> list = new List<LTName>();
+            List<LTName> list;
             list = _dbContext.LTNames.ToList();//.Include(z => z.PlayerScores).Include(z => z.Topic) ??   
-            
+            return list;
         }
-        public void GetLTCities()
+        public List<LTCity> GetLTCities()
         {
-            List<LTCity> list = new List<LTCity>();
+            List<LTCity> list;
             list = _dbContext.LTCities.ToList();
-           
+            return list;
         }
-        public void GetCountries()
+        public List<Country> GetCountries()
         {
             List<Country> list = new List<Country>();
             list = _dbContext.Countries.ToList();
-            
+            return list;
         }
-        public void GetFurnitures()
+        public List<Furniture> GetFurnitures()
         {
             List<Furniture> list = new List<Furniture>();
             list = _dbContext.Furnitures.ToList();
-            
+            return list;
         }
 
-        public void SelectWordsList(int topicNumber)
-        {
-            Dictionary<int, Lazy<TopicDelegate>> strategy = new Dictionary<int, Lazy<TopicDelegate>>
-            {
-                {1, new Lazy<TopicDelegate>(() => GetLTNames )},
-                {2, new Lazy<TopicDelegate>(() => GetLTCities)},
-                {3, new Lazy<TopicDelegate>(() => GetCountries)},
-                {4, new Lazy<TopicDelegate>(() => GetFurnitures)},
-            };
-            strategy[topicNumber].Value.Invoke();
-        }
+
        
         public LTName GetRandomWordInLTName(Topic topic)
         {
