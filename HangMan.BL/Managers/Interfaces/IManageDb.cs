@@ -9,6 +9,6 @@ namespace HangMan.BL.Managers.Interfaces
     {
         List<Topic> GetAllTopics();
         int SelectWordsList(int topicNumber);
-        int SelectWordsListToRandom(Topic topic, int topicNumber);
+        string SelectWordsListToRandom(Topic topic, int topicNumber);
     }
 }

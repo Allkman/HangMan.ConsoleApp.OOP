@@ -43,16 +43,65 @@ namespace HangMan.UI.Managers
 
         private void StartHangMan()
         {
-            int topicNumber = 0;
+           
             bool replay = true;
             while (replay)
             {
                 Console.Clear();
 
                 var topic = TopicSelection();
+                
+                var topicNumber = 0;
                 var word = _manageDb.SelectWordsListToRandom(topic, topicNumber);
+                if (word == null) _messagesRepository.NoWordLeftMessage();
+                //else
+                //{
+                //    _hiddenWordManager = new HiddenWordManager(zodis);
+                //    bool leidziamaSpeti = true;
+                //    _massageFactory.HangmanPictureMessage(beginLives);
+                //    Console.WriteLine();
+                //    Console.WriteLine(_hiddenWordManager.GetHiddedWordStructure());
 
+                //    while (leidziamaSpeti)
+                //    {
+                //        _guess = new Guess(_massageFactory.WordInputMessage(), _hiddenWordManager);
+
+                //        if (_guess.IsWordGuessed)
+                //        {
+                //            WordGuessMechanics(zodis);
+                //            leidziamaSpeti = false;
+                //        }
+                //        else
+                //        {
+                //            _guess.CheckLetter();
+
+                //            if (_hiddenWordManager.IncorrectGuesesCount == maxLives)
+                //            {
+                //                _massageFactory.HangmanPictureMessage(maxLives);
+                //                _massageFactory.LostGameMessage(zodis.Text);
+                //                leidziamaSpeti = false;
+                //            }
+                //            else
+                //            {
+                //                Console.Clear();
+                //                _massageFactory.HangmanPictureMessage(_hiddenWordManager.IncorrectGuesesCount);
+                //                _massageFactory.IncorrectLettersListMessage(_hiddenWordManager.HiddenWord.IncorrectGueses);
+
+                //                Console.WriteLine(_hiddenWordManager.GetHiddedWordStructure());
+                //                if (!_hiddenWordManager.HasHiddenLetters)
+                //                {
+                //                    _massageFactory.WinGameMessage(zodis.Text);
+                //                    leidziamaSpeti = false;
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                //selectedSubject.Words.Remove(zodis);
+                //_playerManager.AddScoreBoard(GetScoreBoard(zodis, user.PlayerId));
+                //replay = _messageRepository.RepeatGameMessage();
             }
+        
         }
         private Topic TopicSelection()
         {
@@ -70,7 +119,7 @@ namespace HangMan.UI.Managers
             }
             Console.Clear();
             _messagesRepository.CorrectTopicMessage(_topics[topicNumber - 1].Name);
-            _manageDb.SelectWordsList(topicNumber);
+            
             return _topics[topicNumber - 1];
         }
 

@@ -48,12 +48,11 @@ namespace HangMan.BL.Managers
             }
             return topicNumber;
         }
-        public int SelectWordsListToRandom(Topic topic, int topicNumber)
+        public string SelectWordsListToRandom(Topic topic, int topicNumber)
         {
-            int numb = 0;
-            topicNumber = SelectWordsList(numb);
+
             Console.Clear();
-            switch (numb)
+            switch (topicNumber)
             {
                 case 0:
                     GetRandomWordInLTName(topic);
@@ -68,7 +67,7 @@ namespace HangMan.BL.Managers
                     GetRandomWordInFurniture(topic);
                     break;
             }
-            return numb;
+            return topic.ToString();
         }
         public List<Topic> GetAllTopics()
         {

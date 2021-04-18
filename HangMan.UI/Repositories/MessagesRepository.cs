@@ -46,6 +46,10 @@ namespace HangMan.UI.Repositories
             Console.WriteLine("");
             return Console.ReadLine();
         }
+        public void NoWordLeftMessage()
+        {
+            Console.WriteLine("No more words in current topic, would you like to choose another topic? Y/N ?");
+        }
         public void PlayerStatisticsMessage(Player player)
         {
             Console.WriteLine($"Player {player.PlayerName} played {player.PlayerScores.Count} times");

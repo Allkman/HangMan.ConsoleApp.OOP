@@ -10,6 +10,7 @@ namespace HangMan.UI.Repositories.Interfaces
         void CorrectTopicMessage(string topicName);
         void IncorrectTopictMessage(string topicNumber);
         string LoginMessage();
+        void NoWordLeftMessage();
         int PlayerGreetingMessage();
         void PlayerStatisticsMessage(Player player);
         void SelectTopicMessage();
