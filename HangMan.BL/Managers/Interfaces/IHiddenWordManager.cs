@@ -1,4 +1,5 @@
-﻿using HangMan.BL.Models;
+﻿
+using HangMan.BL.Models;
 using HangMan.DL.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,10 @@ namespace HangMan.BL.Managers.Interfaces
 {
     public interface IHiddenWordManager
     {
+        LTName LTName { get; }
+        LTCity LTCity { get; }
+        Country Country { get; }
+        Furniture Furniture { get; }
         HiddenWord HiddenWord { get; set; }        
         int IncorrectGuesesCount { get; }
         bool HasHiddenLetters { get; }

@@ -12,7 +12,10 @@ namespace HangMan.DL.Models
         public int PlayerId { get; set; }
         public DateTime DatePlayed { get; set; }
         
-        public int WordId { get; set; }
+        public int LTNameId { get; set; }
+        public int LTCityId { get; set; }
+        public int CountryId { get; set; }
+        public int FurnitureId { get; set; }
         public int GuessCount { get; set; }
         public bool IsCorrect { get; set; }
         public virtual LTName LTName { get; set; }

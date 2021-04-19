@@ -34,5 +34,11 @@ namespace HangMan.BL.Managers
             var player = _dbContext.Players.SingleOrDefault(p => p.PlayerName == playerName);
             return player;
         }
+        public void AddPlayerScore(PlayerScore playerScore)
+        {
+            _dbContext.PlayerScores.Add(playerScore);
+            _dbContext.SaveChanges();            
+        }
+
     }
 }

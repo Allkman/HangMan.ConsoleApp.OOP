@@ -74,5 +74,37 @@ namespace HangMan.UI.Repositories
         {
             _hangerUI.DisplayPicture(incorrectGuessCount);
         }
+        public bool RepeatGameMessage()
+        {
+            Console.WriteLine("Replay game: Y/N?");
+            return Console.ReadKey().KeyChar.ToString().ToUpper() == "Y";
+        }
+        public string WordInputMessage()
+        {
+            Console.WriteLine("\n\nSpėkite raidę ar žodį:");
+            return Console.ReadLine();
+        }
+        public void WinGameMessage(string word)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[[=== Congratulation ===]]");
+            Console.WriteLine(" Word is correct ");
+            Console.WriteLine();
+            Console.WriteLine("Word was: {0}", word);
+        }
+        public void LostGameMessage(string word)
+        {
+            Console.WriteLine();
+            Console.WriteLine(" You lost ");
+            Console.WriteLine(("Word was: {0}", word));
+        }
+        public void IncorrectLettersListMessage(List<string> incorrectGuesses)
+        {
+            Console.Write("\nGuessed letters: ");
+            foreach (var incorrectGuess in incorrectGuesses)
+            {
+                Console.Write($"{incorrectGuess} ");
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HangMan.BL.Managers.Interfaces;
-using HangMan.BL.Models;
 using HangMan.DL.Models;
+using HangMan.BL.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,7 @@ namespace HangMan.BL.Managers
         public LTCity LTCity { get; }
         public Country Country { get; }
         public Furniture Furniture { get; }
-
+        public Topic Topic { get; set; }
 
         public HiddenWord HiddenWord { get; set; }
 
@@ -21,15 +22,26 @@ namespace HangMan.BL.Managers
         public int IncorrectGuesesCount => HiddenWord.IncorrectGueses.Count;
         public bool HasHiddenLetters => HiddenWord.HiddenLetterCount > 0;        
 
-        public HiddenWordManager()
+        public HiddenWordManager(LTName lTName, LTCity lTCity, Country country, Furniture furniture)
         {
-            //TODO show word from selected topic
+            LTName = lTName;
+            LTCity = lTCity;
+            Country = country;
+            Furniture = furniture;
             HiddenWord = new HiddenWord(LTName.Text.Length);
             HiddenWord = new HiddenWord(LTCity.Text.Length);
             HiddenWord = new HiddenWord(Country.Text.Length);
             HiddenWord = new HiddenWord(Furniture.Text.Length);
         }
 
+        public HiddenWordManager()
+        {
+        }
+
+        public void SelectWordToHide(int topicNumber)
+        { 
+
+        }
         public string GetHiddedWordStructure()
         {
 
@@ -50,9 +62,6 @@ namespace HangMan.BL.Managers
             }
         }
 
-        /// <summary>
-        /// Pridedama neteisingai spėta raidė
-        /// </summary>
         public void AddIncorrectLetter(string guessedLetter)
         {
             HiddenWord.IncorrectGueses.Add(guessedLetter);

@@ -1,8 +1,8 @@
 ﻿using HangMan.BL.Helpers;
 using HangMan.BL.Helpers.Interfaces;
 using HangMan.BL.Managers.Interfaces;
-using HangMan.BL.Models;
 using HangMan.DL.Models;
+
 using HangMan.HMServer;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -50,7 +50,6 @@ namespace HangMan.BL.Managers
         }
         public string SelectWordsListToRandom(Topic topic, int topicNumber)
         {
-
             Console.Clear();
             switch (topicNumber)
             {
@@ -69,39 +68,84 @@ namespace HangMan.BL.Managers
             }
             return topic.ToString();
         }
+        public void RemoveWordFromSeletedWordsList(int topicNumber)
+        {
+            //remove word in selected word list
+            Console.Clear();
+            switch (topicNumber)
+            {
+                case 0:
+                    RemoveLTNameWord(LTName);
+                    break;
+                case 1:
+                    RemoveLTCityWord(LTCity);
+                    break;
+                case 2:
+                    RemoveCountryWord(Country);
+                    break;
+                case 3:
+                    RemoveFurnitureWord(Furniture);
+                    break;
+            }
+            //return topic.ToString();
+                     
+        }
+        public void RemoveLTNameWord(LTName word)
+        {
+            _dbContext.LTNames.Remove(word);
+            _dbContext.SaveChanges();
+        }
+        public void RemoveLTCityWord(LTCity word)
+        {
+            _dbContext.LTCities.Remove(word);
+            _dbContext.SaveChanges();
+        }
+        public void RemoveCountryWord(Country word)
+        {
+            _dbContext.Countries.Remove(word);
+            _dbContext.SaveChanges();
+        }
+        public void RemoveFurnitureWord(Furniture word)
+        {
+            _dbContext.Furnitures.Remove(word);
+            _dbContext.SaveChanges();
+        }
         public List<Topic> GetAllTopics()
         {
             List<Topic> list;
             list = _dbContext.Topics.ToList();
+            _dbContext.SaveChanges();
             return list;
         }
         public List<LTName> GetLTNames()
         {
             List<LTName> list;
-            list = _dbContext.LTNames.ToList();//.Include(z => z.PlayerScores).Include(z => z.Topic) ??   
+            list = _dbContext.LTNames.ToList();//.Include(z => z.PlayerScores).Include(z => z.Topic) ??
+            _dbContext.SaveChanges();
             return list;
         }
         public List<LTCity> GetLTCities()
         {
             List<LTCity> list;
             list = _dbContext.LTCities.ToList();
+            _dbContext.SaveChanges();
             return list;
         }
         public List<Country> GetCountries()
         {
             List<Country> list = new List<Country>();
             list = _dbContext.Countries.ToList();
+            _dbContext.SaveChanges();
             return list;
         }
         public List<Furniture> GetFurnitures()
         {
             List<Furniture> list = new List<Furniture>();
             list = _dbContext.Furnitures.ToList();
+            _dbContext.SaveChanges();
             return list;
         }
-
-
-       
+               
         public LTName GetRandomWordInLTName(Topic topic)
         {
             IRandomExtension _rndExtension = new RandomExtension();
