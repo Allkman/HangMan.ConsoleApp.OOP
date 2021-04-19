@@ -27,6 +27,7 @@ namespace HangMan.UI.Managers
         private IGuess _guess;
         const int beginLives = 0;
         const int maxLives = 7;
+        const int topicNumber = 0;
         public GameManager(IPlayerManager playerManager, IMessagesRepository messagesRepository, IManageDb manageDb, IHiddenWordManager hiddenWordManager)
         {
             _playerManager = playerManager;
@@ -57,9 +58,8 @@ namespace HangMan.UI.Managers
             {
                 Console.Clear();
 
-                var topic = TopicSelection();
-                
-                var topicNumber = 0;
+                var topic = TopicSelection();                
+
                 var word = _manageDb.SelectWordsListToRandom(topic, topicNumber);
                 if (word == null) _messagesRepository.NoWordLeftMessage();
                 else
@@ -86,7 +86,7 @@ namespace HangMan.UI.Managers
                             if (_hiddenWordManager.IncorrectGuesesCount == maxLives)
                             {
                                 _messagesRepository.HangmanPictureMessage(maxLives);
-                                _messagesRepository.LostGameMessage(word);
+                                _messagesRepository.LostGameMessage(word.Text);
                                 guessingAllowed = false;
                             }
                             else
@@ -98,7 +98,7 @@ namespace HangMan.UI.Managers
                                 Console.WriteLine(_hiddenWordManager.GetHiddedWordStructure());
                                 if (!_hiddenWordManager.HasHiddenLetters)
                                 {
-                                    _messagesRepository.WinGameMessage(word);
+                                    _messagesRepository.WinGameMessage(word.Text);
                                     guessingAllowed = false;
                                 }
                             }

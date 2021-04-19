@@ -10,6 +10,6 @@ namespace HangMan.BL.Managers.Interfaces
         List<Topic> GetAllTopics();
         void RemoveWordFromSeletedWordsList(int topicNumber);
         int SelectWordsList(int topicNumber);
-        string SelectWordsListToRandom(Topic topic, int topicNumber);
+        Word SelectWordsListToRandom(Topic topic, int topicNumber);
     }
 }

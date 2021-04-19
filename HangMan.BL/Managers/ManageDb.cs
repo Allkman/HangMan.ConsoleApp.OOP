@@ -2,7 +2,6 @@
 using HangMan.BL.Helpers.Interfaces;
 using HangMan.BL.Managers.Interfaces;
 using HangMan.DL.Models;
-
 using HangMan.HMServer;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,16 +20,12 @@ namespace HangMan.BL.Managers
         public Word Word { get; set; }
         public Topic Topic { get; set; }
 
-        private delegate List<Word> TopicDelegate();
-        private delegate Word WordsDelegate();
-        
         public ManageDb(HangManDbContext dbContext)
         {
             _dbContext = dbContext;            
         }
         public int SelectWordsList(int topicNumber)
         {
-            Console.Clear();
            switch(topicNumber)
             { 
                 case 0:
@@ -48,8 +43,9 @@ namespace HangMan.BL.Managers
             }
             return topicNumber;
         }
-        public string SelectWordsListToRandom(Topic topic, int topicNumber)
+        public Word SelectWordsListToRandom(Topic topic, int topicNumber)
         {
+            Word word = new Word();
             Console.Clear();
             switch (topicNumber)
             {
@@ -66,11 +62,10 @@ namespace HangMan.BL.Managers
                     GetRandomWordInFurniture(topic);
                     break;
             }
-            return topic.ToString();
+            return word;
         }
         public void RemoveWordFromSeletedWordsList(int topicNumber)
         {
-            //remove word in selected word list
             Console.Clear();
             switch (topicNumber)
             {
@@ -86,9 +81,7 @@ namespace HangMan.BL.Managers
                 case 3:
                     RemoveFurnitureWord(Furniture);
                     break;
-            }
-            //return topic.ToString();
-                     
+            }         
         }
         public void RemoveLTNameWord(LTName word)
         {
