@@ -27,12 +27,14 @@ namespace HangMan.UI
             _colorify = new Format(Theme.Light);
             
             //-----Dependancy injection-------
-            IPlayerManager playerRepository = new PlayerManager(context);            
+            IPlayerManager playerManager = new PlayerManager(context);            
             IMessagesRepository messagesRepository = new MessagesRepository();
             IManageDb manageDb = new ManageDb(context);
-            IGameManager gameManager = new GameManager(playerRepository, messagesRepository, manageDb);
+            IHiddenWordManager hiddenWordManager = new HiddenWordManager();
+            IGameManager gameManager = new GameManager(playerManager, messagesRepository, manageDb, hiddenWordManager);
             //--------------------------------
             gameManager.PlayerLogin();
+            gameManager.StartHangMan();
         }  
     }
 }

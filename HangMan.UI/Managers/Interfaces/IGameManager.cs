@@ -7,5 +7,6 @@ namespace HangMan.UI.Managers.Interfaces
     public interface IGameManager
     {
         void PlayerLogin();
+        void StartHangMan();
     }
 }

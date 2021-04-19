@@ -19,7 +19,7 @@ namespace HangMan.BL.Models
         }
 
         public bool IsWordGuessed => _guess.Length > 1;
-        private void CheckSelectedWordIsCorrect(int topicNumber)
+        public void CheckSelectedWordIsCorrect(int topicNumber)
         {
             switch(topicNumber)
                 {
@@ -61,7 +61,7 @@ namespace HangMan.BL.Models
             if (isCorrect) _hiddenWordManager.HiddenWord.CorrectGueses = _hiddenWordManager.Furniture.Text.Select(x => x.ToString()).ToArray();
             return isCorrect;
         }
-        private void CheckLetterOfSelectedWord(int topicNumber)
+        public void CheckLetterOfSelectedWord(int topicNumber)
         {
             switch(topicNumber)
             {

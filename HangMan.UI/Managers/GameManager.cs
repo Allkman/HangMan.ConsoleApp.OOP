@@ -49,7 +49,7 @@ namespace HangMan.UI.Managers
             StartHangMan();
         }
 
-        private void StartHangMan()
+        public void StartHangMan()
         {
            
             bool replay = true;
@@ -81,7 +81,7 @@ namespace HangMan.UI.Managers
                         }
                         else
                         {
-                            _guess.CheckLetter();
+                            _guess.CheckSelectedWordIsCorrect(topicNumber);
 
                             if (_hiddenWordManager.IncorrectGuesesCount == maxLives)
                             {
@@ -224,7 +224,7 @@ namespace HangMan.UI.Managers
        
         private void LTNameGuessMechanics(LTName word)
         {
-            if (_guess.CheckWordCorrect())
+            if (_guess.CheckLTNameCorrect())
                 _messagesRepository.WinGameMessage(word.Text);
             else
             {
@@ -234,7 +234,7 @@ namespace HangMan.UI.Managers
         }
         private void LTCityGuessMechanics(LTCity word)
         {
-            if (_guess.CheckWordCorrect())
+            if (_guess.CheckLTCityCorrect())
                 _messagesRepository.WinGameMessage(word.Text);
             else
             {
@@ -244,7 +244,7 @@ namespace HangMan.UI.Managers
         }
         private void CountryGuessMechanics(Country word)
         {
-            if (_guess.CheckWordCorrect())
+            if (_guess.CheckCountryCorrect())
                 _messagesRepository.WinGameMessage(word.Text);
             else
             {
@@ -254,7 +254,7 @@ namespace HangMan.UI.Managers
         }
         private void FurnitureGuessMechanics(Furniture word)
         {
-            if (_guess.CheckWordCorrect())
+            if (_guess.CheckFurnitureCorrect())
                 _messagesRepository.WinGameMessage(word.Text);
             else
             {
